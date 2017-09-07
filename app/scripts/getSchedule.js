@@ -1,5 +1,5 @@
 var schedule;
-var dates = ["10/1","10/8","10/15","10/22","10/29","11/5","11/12","11/19","11/26","12/3","12/10","12/17","12/25","1/1","1/8","1/15"];
+var dates = ["10-06","10-13","10-20","10-27","11-03","11-10","11-17","11-24","12-01","12-08","12-15","12-22","12-29","1-05","1-12","1-19"];
 var broadcasters = ["FOX", "NBC", "CBS"]
 
 $(document).ready(function(){
@@ -9,24 +9,14 @@ $(document).ready(function(){
             updateScheduleTable(schedule);
         });
     });
-
-    $("#week").change(function() {
-        var scheduleTable = $('#exportTlb');
-        clearTableEntries(scheduleTable);
-        var week = this.value;
-        if (week > 0) {
-            updateScheduleToWeek(week);
-        } else if (week == 0) {
-            updateScheduleTable(schedule);
-        }
-    });
 });
 
 function updateScheduleTable(schedule){
     for (week in schedule) {
-        for (game in schedule[week]) {
-            date = dates[week-1]
-            game = schedule[1][game];
+        console.log(week);
+        for (i=0; i< schedule[week].length; i++) {
+            date = week.substring(week.indexOf('-')+1, week.indexOf('-')+6);
+            game = schedule[week][i];
             var scheduleTableLastRow = $('#exportTlb tr:last');
             scheduleTableLastRow.after(buildTableRow(date, game));
         }
@@ -35,7 +25,7 @@ function updateScheduleTable(schedule){
 
 function buildTableRow(date, game){
     var rand = Math.floor(Math.random() * 3);
-    return "<tr><td> " + date + "</td><td> 12:00PM </td><td>" + game[0]['mascot'] + "</td><td>" + game[1]['mascot'] + "</td><td>" + broadcasters[rand] + "</td><td><form action=\"\"><input type=\"radio\" name=\"approval\" value=\"yes\">Yes<br><input type=\"radio\" name=\"approval\" value=\"no\">No<br></form></tr>";
+    return "<tr><td> " + date  + "</td><td>" + game.game_time + ":00" + "</td><td>" + game.home_team + "</td><td>" + game.away_team + "</td><td>" + game.broadcaster + "</td><td><form action=\"\"><input type=\"radio\" name=\"approval\" value=\"yes\">Yes<br><input type=\"radio\" name=\"approval\" value=\"no\">No<br></form></tr>";
 }
 
 function httpGetAsync(theUrl, callback)
