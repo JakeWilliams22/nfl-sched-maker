@@ -9,11 +9,20 @@ $(document).ready(function(){
             updateScheduleTable(schedule);
         });
     });
+    $("#week").change(function() {
+        var scheduleTable = $('#exportTlb');
+        clearTableEntries(scheduleTable);
+        var week = this.value;
+        if (week > 0) {
+            updateScheduleToWeek(week);
+        } else if (week == 0) {
+            updateScheduleTable(schedule);
+        }
+    });
 });
 
 function updateScheduleTable(schedule){
     for (week in schedule) {
-        console.log(week);
         for (i=0; i< schedule[week].length; i++) {
             date = week.substring(week.indexOf('-')+1, week.indexOf('-')+6);
             game = schedule[week][i];
@@ -40,9 +49,12 @@ function httpGetAsync(theUrl, callback)
 }
 
 function updateScheduleToWeek(weekNum) {
-    for (game in schedule[weekNum]) {
-        date = dates[weekNum-1]
-        game = schedule[weekNum][game];
+    console.log('update');
+    week = dates[weekNum-1];
+    week = "2018-" + week + " 00:00:00";
+    for (i=0; i< schedule[week].length; i++) {
+        date = week.substring(week.indexOf('-')+1, week.indexOf('-')+6);
+        game = schedule[week][i];
         var scheduleTableLastRow = $('#exportTlb tr:last');
         scheduleTableLastRow.after(buildTableRow(date, game));
     }
