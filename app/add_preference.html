@@ -26,12 +26,6 @@
 
         <!-- Custom styles for this template -->
         <link href="css/sb-admin.css" rel="stylesheet">
-
-        <style type="text/css">
-            tr:hover {
-                background-color: #f8f9ea;
-            }
-        </style>
     </head>
     <body class="fixed-nav sticky-footer bg-dark" id="page-top">
         <!-- Navigation -->
@@ -42,13 +36,13 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
-                    <li class="nav-item active" data-toggle="tooltip" data-placement="right" title="Schedule">
+                    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Schedule">
                         <a class="nav-link" href="index.html">
                             <i class="fa fa-fw fa-table"></i>
                             <span class="nav-link-text">Schedule</span>
                         </a>
                     </li>
-                    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Preferences">
+                    <li class="nav-item active" data-toggle="tooltip" data-placement="right" title="Preferences">
                         <a class="nav-link" href="preferences.html">
                             <i class="fa fa-fw fa-file"></i>
                             <span class="nav-link-text">Preferences</span>
@@ -89,66 +83,44 @@
                 <!-- Example Tables Card -->
                 <div class="card mb-3">
                     <div class="card-header">
-                        <i class="fa fa-table"></i> Schedule
+                        <i class="fa fa-table"></i> Add Preference
                     </div>
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <div id="Schedule" class="tabcontent active">
-                                <form class="form-inline">
+                    <div class="container" align="center">
+                        <br>
+                        <table width="30%">
+                            <tr>
+                                <td>
                                     <div class="form-group">
-                                        <label for="week">Select Term:&nbsp;&nbsp;</label>
-                                        <select class="form-control" name="week" id="week">
-                                            <option value="0">All</option>
-                                            <option value="1">Week 1</option>
-                                            <option value="2">Week 2</option>
-                                            <option value="3">Week 3</option>
-                                            <option value="4">Week 4</option>
-                                            <option value="5">Week 5</option>
-                                            <option value="6">Week 6</option>
-                                            <option value="7">Week 7</option>
-                                            <option value="8">Week 8</option>
-                                            <option value="9">Week 9</option>
-                                            <option value="10">Week 10</option>
-                                            <option value="11">Week 11</option>
-                                            <option value="12">Week 12</option>
-                                            <option value="13">Week 13</option>
-                                            <option value="14">Week 14</option>
-                                            <option value="15">Week 15</option>
-                                            <option value="16">Week 16</option>
-                                        </select>
+                                        <input type="text" name="time" placeholder="Time" class="form-username form-control" id="form-username">
                                     </div>
-                                </form>
-                                <br>
-                                <table class="table table-bordered" id="exportTlb" width="100%" cellspacing="0">
-                                    <colgroup>
-                                        <col width="18%">
-                                        <col width="18%">
-                                        <col width="18%">
-                                        <col width="18%">
-                                        <col width="18%">
-                                        <col width="10%">
-                                    </colgroup>
-                                    <thead>
-                                        <tr>
-                                            <th>Date</th>
-                                            <th>Time</th>
-                                            <th>Home</th>
-                                            <th>Away</th>
-                                            <th>Broadcaster</th>
-                                            <th>Approval</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <!-- Generated schedules come out here -->
-                                        <tr align="center"><td colspan="6">Click "Generate" button to generate schdedule.</td></tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="form-group">
+                                        <input type="text" name="pref" placeholder="Preference" class="form-password form-control" id="form-password">
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="form-group">
+                                        <input type="text" name="value" placeholder="Value" class="form-password form-control" id="form-password">
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="form-group">
+                                        <input type="text" name="note" placeholder="Notes" class="form-password form-control" id="form-password">
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
                     </div>
                     <div class="card-footer small text-muted" align="right">
-                        <button class="btn export" type="button">Export</button>
-                        <button class="btn btn-success export" type="button" id="generate_schedule_button" style="margin-right: 10px">Generate</button>
+                        <button class="btn export" type="button" onclick="location.href='preferences.html'">Back</button>
+                        <button class="btn btn-success export" type="button" style="margin-right: 10px">Add</button>
                     </div>
                 </div>
             </div>

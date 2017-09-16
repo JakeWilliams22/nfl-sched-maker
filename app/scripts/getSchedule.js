@@ -21,24 +21,27 @@ $(document).ready(function(){
     });
 });
 
-function updateScheduleTable(schedule){
+function updateScheduleTable(schedule, game){
+    $('#exportTlb tbody').children('tr').remove();
     for (week in schedule) {
         for (i=0; i< schedule[week].length; i++) {
             date = week.substring(week.indexOf('-')+1, week.indexOf('-')+6);
             game = schedule[week][i];
-            var scheduleTableLastRow = $('#exportTlb tr:last');
-            scheduleTableLastRow.after(buildTableRow(date, game));
+            console.log(game);
+            $('#exportTlb tbody').append(buildTableRow(date, game));
         }
     }
 }
 
 function buildTableRow(date, game){
-    var rand = Math.floor(Math.random() * 3);
-    return "<tr><td> " + date  + "</td><td>" + game.game_time + ":00" + "</td><td>" + game.home_team + "</td><td>" + game.away_team + "</td><td>" + game.broadcaster + "</td><td><form action=\"\"><input type=\"radio\" name=\"approval\" value=\"yes\">Yes<br><input type=\"radio\" name=\"approval\" value=\"no\">No<br></form></tr>";
+    return '<tr><td> ' + date  + '</td><td>' + game.game_time + ':00' + '</td><td>' + game.home_team 
+            + '</td><td>' + game.away_team + '</td><td>' + game.broadcaster 
+            + '</td><td><form action=\"\"><div class="row"><div class="col-sm-offset-5 col-sm-2 text-center">' 
+            + '<div class="text-center btn-group"><button class="btn btn-success" type="button">Y</button>'
+            + '<button class="btn btn-danger" type="button">N</button></div></div></div></form></tr>';
 }
 
-function httpGetAsync(theUrl, callback)
-{
+function httpGetAsync(theUrl, callback){
     var xmlHttp = new XMLHttpRequest();
     xmlHttp.onreadystatechange = function() {
         if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
@@ -51,12 +54,16 @@ function httpGetAsync(theUrl, callback)
 function updateScheduleToWeek(weekNum) {
     console.log('update');
     week = dates[weekNum-1];
-    week = "2018-" + week + " 00:00:00";
+    var mon = parseInt(week.substring(0,2));
+    if (mon >= 10 && mon <= 12) {
+        week = "2018-" + week + " 00:00:00";
+    } else {
+        week = "2019-0" + week + " 00:00:00";
+    }
     for (i=0; i< schedule[week].length; i++) {
         date = week.substring(week.indexOf('-')+1, week.indexOf('-')+6);
         game = schedule[week][i];
-        var scheduleTableLastRow = $('#exportTlb tr:last');
-        scheduleTableLastRow.after(buildTableRow(date, game));
+        $('#exportTlb tbody').append(buildTableRow(date, game));
     }
 }
 

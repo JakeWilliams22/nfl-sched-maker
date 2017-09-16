@@ -26,12 +26,6 @@
 
         <!-- Custom styles for this template -->
         <link href="css/sb-admin.css" rel="stylesheet">
-
-        <style type="text/css">
-            tr:hover {
-                background-color: #f8f9ea;
-            }
-        </style>
     </head>
     <body class="fixed-nav sticky-footer bg-dark" id="page-top">
         <!-- Navigation -->
@@ -42,7 +36,7 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
-                    <li class="nav-item active" data-toggle="tooltip" data-placement="right" title="Schedule">
+                    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Schedule">
                         <a class="nav-link" href="index.html">
                             <i class="fa fa-fw fa-table"></i>
                             <span class="nav-link-text">Schedule</span>
@@ -54,7 +48,7 @@
                             <span class="nav-link-text">Preferences</span>
                         </a>
                     </li>
-                    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Admin Console">
+                    <li class="nav-item active" data-toggle="tooltip" data-placement="right" title="Admin Console">
                         <a class="nav-link" href="admin_console.html">
                             <i class="fa fa-fw fa-cog"></i>
                             <span class="nav-link-text">Admin Console</span>
@@ -89,66 +83,51 @@
                 <!-- Example Tables Card -->
                 <div class="card mb-3">
                     <div class="card-header">
-                        <i class="fa fa-table"></i> Schedule
+                        <i class="fa fa-table"></i> Admin Console
                     </div>
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <div id="Schedule" class="tabcontent active">
-                                <form class="form-inline">
-                                    <div class="form-group">
-                                        <label for="week">Select Term:&nbsp;&nbsp;</label>
-                                        <select class="form-control" name="week" id="week">
-                                            <option value="0">All</option>
-                                            <option value="1">Week 1</option>
-                                            <option value="2">Week 2</option>
-                                            <option value="3">Week 3</option>
-                                            <option value="4">Week 4</option>
-                                            <option value="5">Week 5</option>
-                                            <option value="6">Week 6</option>
-                                            <option value="7">Week 7</option>
-                                            <option value="8">Week 8</option>
-                                            <option value="9">Week 9</option>
-                                            <option value="10">Week 10</option>
-                                            <option value="11">Week 11</option>
-                                            <option value="12">Week 12</option>
-                                            <option value="13">Week 13</option>
-                                            <option value="14">Week 14</option>
-                                            <option value="15">Week 15</option>
-                                            <option value="16">Week 16</option>
-                                        </select>
-                                    </div>
-                                </form>
-                                <br>
-                                <table class="table table-bordered" id="exportTlb" width="100%" cellspacing="0">
-                                    <colgroup>
-                                        <col width="18%">
-                                        <col width="18%">
-                                        <col width="18%">
-                                        <col width="18%">
-                                        <col width="18%">
-                                        <col width="10%">
-                                    </colgroup>
-                                    <thead>
-                                        <tr>
-                                            <th>Date</th>
-                                            <th>Time</th>
-                                            <th>Home</th>
-                                            <th>Away</th>
-                                            <th>Broadcaster</th>
-                                            <th>Approval</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <!-- Generated schedules come out here -->
-                                        <tr align="center"><td colspan="6">Click "Generate" button to generate schdedule.</td></tr>
-                                    </tbody>
-                                </table>
+                    <div class="container">
+                        <br>
+                        <label for=""><h4>Registration Request:</h4></label>
+                        <form action="">
+                            <div class="form-inline">
+                                <label for="week">User:&nbsp;&nbsp;</label>
+                                <select class="form-control" name="week" id="week">
+                                    <option>Jacob Williams</option>
+                                    <option>Elizabeth Cooper</option>
+                                    <option>Saqlain Golandaz</option>
+                                    <option>Cole Taylor</option>
+                                    <option>Jaehong Park</option>
+                                </select>
+                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                <button class="btn btn-success export" type="button">Accept</button>
+                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                <button class="btn export" type="button">Deny</button>
                             </div>
-                        </div>
+                        </form>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <br><br>
+                        <label for=""><h4>Delete / Suspend Account:</h4></label>
+                        <form action="">
+                            <div class="form-inline">
+                                <label for="week">User:&nbsp;&nbsp;</label>
+                                <select class="form-control" name="week" id="week">
+                                    <option>Jacob Williams</option>
+                                    <option>Elizabeth Cooper</option>
+                                    <option>Saqlain Golandaz</option>
+                                    <option>Cole Taylor</option>
+                                    <option>Jaehong Park</option>
+                                </select>
+                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                <button class="btn btn-success export" type="button">Delete</button>
+                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                <button class="btn export" type="button">Suspend</button>
+                            </div>
+                        </form>
+                        <br>
                     </div>
                     <div class="card-footer small text-muted" align="right">
-                        <button class="btn export" type="button">Export</button>
-                        <button class="btn btn-success export" type="button" id="generate_schedule_button" style="margin-right: 10px">Generate</button>
+                        <button class="btn btn-warning export" type="button">Reset Schedule</button>
+                        <button class="btn btn-warning export" type="button" style="margin-right: 10px">Approve Schedule</button>
                     </div>
                 </div>
             </div>
