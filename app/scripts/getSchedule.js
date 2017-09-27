@@ -5,7 +5,11 @@ var broadcasters = ["FOX", "NBC", "CBS"]
 $(document).ready(function(){
     $("#generate_schedule_button").click(function(){
         httpGetAsync('https://nfl-schedule-algorithm.herokuapp.com/generate-optimized-schedule', function(data) {
-            schedule = jQuery.parseJSON(data);
+            file = jQuery.parseJSON(data);
+            diffScore = file.difficulty_score;
+            travelScore = file.travel_score;
+            console.log(diffScore);
+            schedule = file.sched;
             updateScheduleTable(schedule);
         });
     });
