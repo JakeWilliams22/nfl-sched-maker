@@ -8,8 +8,9 @@ $(document).ready(function(){
             file = jQuery.parseJSON(data);
             diffScore = file.difficulty_score;
             travelScore = file.travel_score;
-            console.log(diffScore);
             schedule = file.sched;
+            $('#exportTravel').append("Travel Score: " + travelScore);
+            $('#exportDiff').append("Schedule Difficulty: " + diffScore);
             updateScheduleTable(schedule);
         });
     });
@@ -31,7 +32,6 @@ function updateScheduleTable(schedule, game){
         for (i=0; i< schedule[week].length; i++) {
             date = week.substring(week.indexOf('-')+1, week.indexOf('-')+6);
             game = schedule[week][i];
-            console.log(game);
             $('#exportTlb tbody').append(buildTableRow(date, game));
         }
     }
