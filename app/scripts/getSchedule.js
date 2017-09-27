@@ -7,7 +7,7 @@ $(document).ready(function(){
         httpGetAsync('https://nfl-schedule-algorithm.herokuapp.com/generate-optimized-schedule', function(data) {
             schedule = jQuery.parseJSON(data);
             file = jQuery.parseJSON(data);
-            diffScore = file.difficulty_score;
+            diffScore = file.difficulty_score.toFixed(4);
             travelScore = file.travel_score;
             schedule = file.sched;
             $('#exportTravel').append("Travel Score: " + travelScore);
