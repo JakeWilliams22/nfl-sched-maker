@@ -10,8 +10,8 @@ $(document).ready(function(){
             diffScore = file.difficulty_score.toFixed(4);
             travelScore = file.travel_score;
             schedule = file.sched;
-            $('#exportTravel').append("Travel Score: " + travelScore);
-            $('#exportDiff').append("Schedule Difficulty: " + diffScore);
+            $('#exportTravel').replaceWith('<label style="float: right; margin-right: 20px">Difficulty Score: ' + diffScore + '</label>');
+            $('#exportDiff').replaceWith('<label style="float: right"> Travel Score: ' + travelScore + '</label>');
             updateScheduleTable(schedule);
         });
     });
@@ -29,6 +29,7 @@ $(document).ready(function(){
 
 function updateScheduleTable(schedule, game){
     $('#exportTlb tbody').children('tr').remove();
+
     for (week in schedule) {
         for (i=0; i< schedule[week].length; i++) {
             date = week.substring(week.indexOf('-')+1, week.indexOf('-')+6);
