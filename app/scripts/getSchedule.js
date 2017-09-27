@@ -5,10 +5,7 @@ var broadcasters = ["FOX", "NBC", "CBS"]
 $(document).ready(function(){
     $("#generate_schedule_button").click(function(){
         httpGetAsync('https://nfl-schedule-algorithm.herokuapp.com/generate-optimized-schedule', function(data) {
-<<<<<<< HEAD
             schedule = jQuery.parseJSON(data);
-=======
->>>>>>> 6e7c2818953d4e05c2e1ec01584430110b1017a6
             file = jQuery.parseJSON(data);
             diffScore = file.difficulty_score;
             travelScore = file.travel_score;
