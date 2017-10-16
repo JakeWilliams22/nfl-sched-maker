@@ -18,6 +18,7 @@ $(document).ready(function(){
     });
     $("#week").change(function() {
         var scheduleTable = $('#exportTlb');
+        $("#team").val(0);
         clearTableEntries(scheduleTable);
         var week = this.value;
         if (week > 0) {
@@ -28,6 +29,7 @@ $(document).ready(function(){
     });
     $("#team").change(function() {
         var scheduleTable = $('#exportTlb');
+        $("#week").val(0);
         clearTableEntries(scheduleTable);
         var team = this.value;
         if (team == 0) {
