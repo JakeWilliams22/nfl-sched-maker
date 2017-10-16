@@ -10,6 +10,7 @@ $(document).ready(function(){
             diffScore = file.difficulty_score.toFixed(4);
             travelScore = file.travel_score.toFixed(4);
             schedule = file.sched;
+            //$('#exportRules').replaceWith('<label style="float: right; margin-right: 20px">Rules: ' + ruleScore + '</label>');
             $('#exportTravel').replaceWith('<label style="float: right; margin-right: 20px">Difficulty Score: ' + diffScore + '</label>');
             $('#exportDiff').replaceWith('<label style="float: right"> Travel Score: ' + travelScore + '</label>');
             updateScheduleTable(schedule);
@@ -23,6 +24,16 @@ $(document).ready(function(){
             updateScheduleToWeek(week);
         } else if (week == 0) {
             updateScheduleTable(schedule);
+        }
+    });
+    $("#team").change(function() {
+        var scheduleTable = $('#exportTlb');
+        clearTableEntries(scheduleTable);
+        var team = this.value;
+        if (team == 0) {
+            updateScheduleTable(schedule);
+        } else {
+            updateScheduleToTeam(team);
         }
     });
 });
@@ -70,6 +81,28 @@ function updateScheduleToWeek(weekNum) {
         date = week.substring(week.indexOf('-')+1, week.indexOf('-')+6);
         game = schedule[week][i];
         $('#exportTlb tbody').append(buildTableRow(date, game));
+    }
+}
+
+function updateScheduleToTeam(teamName) {
+    console.log('update');
+    console.log(teamName);
+    for (i=0; i<dates.length; i++) {
+        week = dates[i];
+        var mon = parseInt(week.substring(0,2));
+        if (mon >= 10 && mon <= 12) {
+            week = "2018-" + week + " 00:00:00";
+        } else {
+            week = "2019-0" + week + " 00:00:00";
+        }
+        for (j=0; j<schedule[week].length; j++) {
+            game = schedule[week][j];
+            console.log(game.away_team);
+            date = week.substring(week.indexOf('-')+1, week.indexOf('-')+6);
+            if (game.away_team == teamName || game.home_team == teamName) {
+                $('#exportTlb tbody').append(buildTableRow(date, game));
+            }
+        }
     }
 }
 
