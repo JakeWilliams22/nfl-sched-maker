@@ -19,3 +19,15 @@ function openCity(evt, tabName) {
     evt.currentTarget.className += " active";
 }
 
+// In the schedule screen, when the user clicks the "generate" button,
+// it shows the loading icon until a generated schedule shows up.
+function showLoading() {
+    var l = document.getElementById("loading");
+    var lm = document.getElementById("loadingMsg");
+    lm.style.display = "none";
+    if (l.style.display == "none") {
+        l.style.display = "block";
+    } else {
+        l.style.display = "none";
+    }
+}

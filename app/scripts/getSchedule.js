@@ -55,9 +55,8 @@ function updateScheduleTable(schedule, game){
 function buildTableRow(date, game){
     return '<tr><td> ' + date  + '</td><td>' + game.game_time + ':00' + '</td><td>' + game.home_team 
             + '</td><td>' + game.away_team + '</td><td>' + game.broadcaster 
-            + '</td><td><form action=\"\"><div class="row"><div class="col-sm-offset-5 col-sm-2 text-center">' 
-            + '<div class="text-center btn-group"><button class="btn btn-success" type="button">Y</button>'
-            + '<button class="btn btn-danger" type="button">N</button></div></div></div></form></tr>';
+            + '</td><td align="center"><input type="checkbox" value="1"></td>'
+            + '<td align="center"><input type="checkbox" value="0"></td></tr>';
 }
 
 function httpGetAsync(theUrl, callback){

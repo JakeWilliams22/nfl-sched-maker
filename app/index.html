@@ -31,6 +31,47 @@
             tr:hover {
                 background-color: #f8f9ea;
             }
+            .spinner {
+                height: 50px;
+                width: 50px;
+                position: relative;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                margin: auto;
+            }
+            .inner {
+                height: 50px;
+                width: 50px;
+                display: block;
+                position: absolute;
+                top: 0;
+                left: 0;
+                border-radius: 100%;
+                border: 4px solid transparent;
+                opacity: 0.5;
+                box-sizing: border-box;
+            }
+            .inner:nth-child(1) {
+                border-top-color: #FC9504;
+                border-bottom-color: #FC9504;
+                animation: rotate 2s ease infinite;
+            }
+            .inner:nth-child(2) {
+                border-left-color: #5634B2;
+                border-right-color: #5634B2;
+                animation: rotate 3s ease infinite;
+            }
+            .inner:nth-child(3) {
+                border-top-color: #EB0028;
+                border-bottom-color: #EB0028;
+                animation: rotate 4s ease infinite;
+            }
+            @keyframes rotate {
+                from{transform: rotate(0deg)}
+                to{transform: rotate(360deg)}
+            }
         </style>
     </head>
     <body class="fixed-nav sticky-footer bg-dark" id="page-top">
@@ -96,7 +137,7 @@
                             <div id="Schedule" class="tabcontent active">
                                 <form class="form-inline">
                                     <div class="form-group" style="margin-bottom: 5px">
-                                        <label for="week" style="width: 96px;">Select Term:&nbsp;&nbsp;</label>
+                                        <label for="week" style="width: 110px;">Select Term:&nbsp;&nbsp;</label>
                                         <select class="form-control" name="week" id="week">
                                             <option value="0">All</option>
                                             <option value="1">Week 1</option>
@@ -120,7 +161,7 @@
                                 </form>
                                 <form class="form-inline">
                                     <div class="form-group">
-                                        <label for="team" style="width: 96px;">Select Team:&nbsp;&nbsp;</label>
+                                        <label for="team" style="width: 110px;">Select Team:&nbsp;&nbsp;</label>
                                         <select class="form-control" name="team" id="team">
                                             <option value="0">All</option>
                                             <option value="Arizona Cardinals">Arizona Cardinals</option>
@@ -164,11 +205,12 @@
                                 <br>
                                 <table class="table table-bordered" id="exportTlb" width="100%" cellspacing="0">
                                     <colgroup>
-                                        <col width="18%">
-                                        <col width="18%">
-                                        <col width="18%">
-                                        <col width="18%">
-                                        <col width="18%">
+                                        <col width="10%">
+                                        <col width="10%">
+                                        <col width="22%">
+                                        <col width="22%">
+                                        <col width="16%">
+                                        <col width="10%">
                                         <col width="10%">
                                     </colgroup>
                                     <thead>
@@ -178,12 +220,26 @@
                                             <th>Home</th>
                                             <th>Away</th>
                                             <th>Broadcaster</th>
-                                            <th>Approval</th>
+                                            <td align="center"><b>Approve</b></td>
+                                            <td align="center"><b>Deny</b></td>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <!-- Generated schedules come out here -->
-                                        <tr align="center"><td colspan="6">Click "Generate" button to generate schdedule.</td></tr>
+                                        <form action="#" method="POST">
+                                            <!-- Generated schedules come out here -->
+                                            <tr align="center">
+                                                <td id="loadingMsg" colspan="7">Click "Generate" button to generate schdedule.</td>
+                                            </tr>
+                                            <tr align="center">
+                                                <td colspan="7">
+                                                    <div id="loading" class="spinner" style="display: none">
+                                                        <span class="inner"></span>
+                                                        <span class="inner"></span>
+                                                        <span class="inner"></span>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </form>
                                     </tbody>
                                 </table>
                             </div>
@@ -191,7 +247,7 @@
                     </div>
                     <div class="card-footer small text-muted" align="right">
                         <button class="btn export" type="button">Export</button>
-                        <button class="btn btn-success export" type="button" id="generate_schedule_button" style="margin-right: 10px">Generate</button>
+                        <button class="btn btn-success export" type="button" onclick="showLoading()" id="generate_schedule_button" style="margin-right: 10px">Generate</button>
                     </div>
                 </div>
             </div>
