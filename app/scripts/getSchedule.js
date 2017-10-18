@@ -53,10 +53,12 @@ function updateScheduleTable(schedule, game){
 }
 
 function buildTableRow(date, game){
+    approved = game.approved == 1 ? "checked" : ""
+    disapproved = game.approved == -1 ? "checked" : ""
     return '<tr><td> ' + date  + '</td><td>' + game.game_time + ':00' + '</td><td>' + game.home_team 
             + '</td><td>' + game.away_team + '</td><td>' + game.broadcaster 
-            + '</td><td align="center"><input type="checkbox" value="1"></td>'
-            + '<td align="center"><input type="checkbox" value="0"></td></tr>';
+            + '</td><td align="center"><input type="checkbox" value="1"' + approved + '></td>'
+            + '<td align="center"><input type="checkbox" value="0"' + disapproved + '></td></tr>';
 }
 
 function httpGetAsync(theUrl, callback){
