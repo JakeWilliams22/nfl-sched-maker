@@ -1,6 +1,8 @@
 var schedule;
 var dates = ["10-06","10-13","10-20","10-27","11-03","11-10","11-17","11-24","12-01","12-08","12-15","12-22","12-29","1-05","1-12","1-19"];
-var broadcasters = ["FOX", "NBC", "CBS"]
+var broadcasters = ["FOX", "NBC", "CBS"];
+var pos = -1;
+var a_d_sched = '';
 
 $(document).ready(function(){
     $("#generate_schedule_button").click(function(){
@@ -15,6 +17,9 @@ $(document).ready(function(){
             $('#exportDiff').replaceWith('<label style="float: right"> Travel Score: ' + travelScore + '</label>');
             updateScheduleTable(schedule);
         });
+
+        // This function makes approved/denied schedule into JSON file
+        approved_denied_sched();
     });
     $("#week").change(function() {
         var scheduleTable = $('#exportTlb');
@@ -52,14 +57,17 @@ function updateScheduleTable(schedule, game){
     }
 }
 
-function buildTableRow(date, game){
-    return '<tr><td> ' + date  + '</td><td>' + game.game_time + ':00' + '</td><td>' + game.home_team 
-            + '</td><td>' + game.away_team + '</td><td>' + game.broadcaster 
-            + '</td><td align="center"><input type="checkbox" value="1"></td>'
-            + '<td align="center"><input type="checkbox" value="0"></td></tr>';
+function buildTableRow(date, game) {
+    pos++;
+    return '<tr><td id="date' + pos + '" name="' + week +'">' + date + '</td><td id="game_time' + pos + '" name="' + game.game_time +'">' + game.game_time 
+            + ':00' + '</td><td id="home_team' + pos + '">' + game.home_team 
+            + '</td><td id="away_team' + pos + '">' + game.away_team + '</td><td id="broadcaster' + pos + '">' + game.broadcaster 
+            + '</td><td align="center"><input type="radio" value="1" class="approval' + pos + '" name="approval' + pos +'"></td>'
+            + '<td align="center"><input type="radio" value="-1" class="approval' + pos + '" name="approval' + pos +'"></td>'
+            + '<td hidden><input type="radio" value="0" class="approval' + pos + '" name="approval' + pos + '" checked></td></tr>';
 }
 
-function httpGetAsync(theUrl, callback){
+function httpGetAsync(theUrl, callback) {
     var xmlHttp = new XMLHttpRequest();
     xmlHttp.onreadystatechange = function() {
         if (xmlHttp.readyState == 4 && xmlHttp.status == 200)

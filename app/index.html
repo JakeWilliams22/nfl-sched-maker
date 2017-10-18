@@ -224,8 +224,8 @@
                                             <td align="center"><b>Deny</b></td>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        <form action="#" method="POST">
+                                    <tbody id="tblBody">
+                                        <form action="scripts/setSchedule.js" method="POST" name="#">
                                             <!-- Generated schedules come out here -->
                                             <tr align="center">
                                                 <td id="loadingMsg" colspan="7">Click "Generate" button to generate schdedule.</td>
@@ -239,7 +239,6 @@
                                                     </div>
                                                 </td>
                                             </tr>
-                                        </form>
                                     </tbody>
                                 </table>
                             </div>
@@ -247,8 +246,9 @@
                     </div>
                     <div class="card-footer small text-muted" align="right">
                         <button class="btn export" type="button">Export</button>
-                        <button class="btn btn-success export" type="button" onclick="showLoading()" id="generate_schedule_button" style="margin-right: 10px">Generate</button>
+                        <button class="btn btn-success export" type="button" onclick="showLoading();" id="generate_schedule_button" style="margin-right: 10px">Generate</button>
                     </div>
+                    </form>
                 </div>
             </div>
             <!-- /.container-fluid -->
@@ -302,5 +302,67 @@
 
         <!-- Custom scripts for this template -->
         <script src="js/sb-admin.min.js"></script>
+
+        <script type="text/javascript">
+
+            // This function makes approved/denied schedule into JSON file
+            function approved_denied_sched() {
+                var tbl = document.getElementById("tblBody");
+                var date, time, home_team, away_team, broadcaster;
+                var first = true;
+                var prevDate = 0;
+                var a_d_sched = '{"difficulty_score":' + file.difficulty_score + ',"travel_score":' + file.travel_score
+                                + ',"sched":{';
+
+                for (var i = 2; i < tbl.rows.length; i++) {
+                    date = document.getElementById("date" + (i - 2)).getAttribute("name");
+                    game_time = document.getElementById("game_time" + (i - 2)).getAttribute("name");
+                    home_team = document.getElementById("home_team" + (i - 2)).innerHTML;
+                    away_team = document.getElementById("away_team" + (i - 2)).innerHTML;
+                    broadcaster = document.getElementById("broadcaster" + (i - 2)).innerHTML;
+                    
+                    approval = document.getElementsByClassName("approval" + (i - 2));
+                    if (approval[0].checked) {
+                        approval = approval[0].value;
+                    } else if (approval[1].checked) {
+                        approval = approval[1].value;
+                    } else {
+                        approval = approval[2].value;
+                    }
+
+
+                    if (prevDate == 0) { // Initial row
+                        a_d_sched += '"' + date + '":[';
+                    } else if (prevDate != 0 && prevDate != date) { // Not initial and diffent date
+                        if (a_d_sched.charAt(a_d_sched.length - 1) == ',') {
+                            a_d_sched = a_d_sched.substring(0, a_d_sched.length - 1);
+                        }
+                        a_d_sched += '],"' + date + '":[';
+                    }
+
+                    a_d_sched += '{"home_team":"' + home_team
+                            + '","away_team":"' + away_team
+                            + '","game_time":' + game_time
+                            + ',"broadcaster":"' + broadcaster
+                            + '","approved":' + approval
+                            + '}';
+
+                    if (first || prevDate == date) {
+                        first = false;
+                        a_d_sched += ','
+                    }
+                    
+                    prevDate = date;
+
+                    if (i == tbl.rows.length - 1) {
+                        if (a_d_sched.charAt(a_d_sched.length - 1) == ',') {
+                            a_d_sched = a_d_sched.substring(0, a_d_sched.length - 1);
+                        }
+                        a_d_sched += ']}}';
+                    }
+                }
+                console.log(a_d_sched);
+            }
+        </script>
     </body>
 </html>
