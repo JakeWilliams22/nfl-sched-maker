@@ -6,21 +6,12 @@ var a_d_sched = '';
 
 $(document).ready(function(){
     $("#generate_schedule_button").click(function(){
-        httpGetAsync('https://nfl-schedule-algorithm.herokuapp.com/generate-optimized-schedule', function(data) {
-            schedule = jQuery.parseJSON(data);
-            file = jQuery.parseJSON(data);
-            diffScore = file.difficulty_score.toFixed(4);
-            travelScore = file.travel_score.toFixed(4);
-            schedule = file.sched;
-            //$('#exportRules').replaceWith('<label style="float: right; margin-right: 20px">Rules: ' + ruleScore + '</label>');
-            $('#exportTravel').replaceWith('<label style="float: right; margin-right: 20px">Difficulty Score: ' + diffScore + '</label>');
-            $('#exportDiff').replaceWith('<label style="float: right"> Travel Score: ' + travelScore + '</label>');
-            updateScheduleTable(schedule);
-        });
-
-        // This function makes approved/denied schedule into JSON file
-        approved_denied_sched();
-    });
+        approved_denied_sched()
+        if (a_d_sched != '')
+          $.post('http://localhost:5000/generate-optimized-schedule', {schedule: a_d_sched})
+        else
+          $.get('http://localhost:5000/generate-optimized-schedule', handleScheduleResponse)
+    })
     $("#week").change(function() {
         var scheduleTable = $('#exportTlb');
         $("#team").val(0);
@@ -44,6 +35,18 @@ $(document).ready(function(){
         }
     });
 });
+
+function handleScheduleResponse(data){
+    schedule = jQuery.parseJSON(data);
+    file = jQuery.parseJSON(data);
+    diffScore = file.difficulty_score.toFixed(4);
+    travelScore = file.travel_score.toFixed(4);
+    schedule = file.sched;
+    //$('#exportRules').replaceWith('<label style="float: right; margin-right: 20px">Rules: ' + ruleScore + '</label>');
+    $('#exportTravel').replaceWith('<label style="float: right; margin-right: 20px">Difficulty Score: ' + diffScore + '</label>');
+    $('#exportDiff').replaceWith('<label style="float: right"> Travel Score: ' + travelScore + '</label>');
+    updateScheduleTable(schedule);
+}
 
 function updateScheduleTable(schedule, game){
     $('#exportTlb tbody').children('tr').remove();

@@ -311,8 +311,7 @@
                 var date, time, home_team, away_team, broadcaster;
                 var first = true;
                 var prevDate = 0;
-                var a_d_sched = '{"difficulty_score":' + file.difficulty_score + ',"travel_score":' + file.travel_score
-                                + ',"sched":{';
+                var a_d_sched = '{"sched":{';
 
                 for (var i = 2; i < tbl.rows.length; i++) {
                     date = document.getElementById("date" + (i - 2)).getAttribute("name");
