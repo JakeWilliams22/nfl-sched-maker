@@ -314,6 +314,7 @@
                 var a_d_sched = '{"sched":{';
 
                 for (var i = 2; i < tbl.rows.length; i++) {
+                    first = true
                     date = document.getElementById("date" + (i - 2)).getAttribute("name");
                     game_time = document.getElementById("game_time" + (i - 2)).getAttribute("name");
                     home_team = document.getElementById("home_team" + (i - 2)).innerHTML;
@@ -360,6 +361,12 @@
                         a_d_sched += ']}}';
                     }
                 }
+                
+                if (a_d_sched == '{"sched":{') {
+                  return ''
+                }
+                console.log(a_d_sched)
+                return a_d_sched
             }
         </script>
     </body>

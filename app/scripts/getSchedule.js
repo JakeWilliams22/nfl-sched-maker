@@ -6,7 +6,7 @@ var a_d_sched = '';
 
 $(document).ready(function(){
     $("#generate_schedule_button").click(function(){
-        approved_denied_sched()
+        a_d_sched = approved_denied_sched()
         if (a_d_sched != '')
           $.post('http://localhost:5000/generate-optimized-schedule', {schedule: a_d_sched})
         else
