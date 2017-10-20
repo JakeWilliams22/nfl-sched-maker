@@ -225,20 +225,19 @@
                                         </tr>
                                     </thead>
                                     <tbody id="tblBody">
-                                        <form action="scripts/setSchedule.js" method="POST" name="#">
-                                            <!-- Generated schedules come out here -->
-                                            <tr align="center">
-                                                <td id="loadingMsg" colspan="7">Click "Generate" button to generate schdedule.</td>
-                                            </tr>
-                                            <tr align="center">
-                                                <td colspan="7">
-                                                    <div id="loading" class="spinner" style="display: none">
-                                                        <span class="inner"></span>
-                                                        <span class="inner"></span>
-                                                        <span class="inner"></span>
-                                                    </div>
-                                                </td>
-                                            </tr>
+                                        <!-- Generated schedules come out here -->
+                                        <tr id="temp" align="center">
+                                            <td id="loadingMsg" colspan="7">Click "Generate" button to generate schdedule.</td>
+                                        </tr>
+                                        <tr id="temp" align="center">
+                                            <td colspan="7">
+                                                <div id="loading" class="spinner" style="display: none">
+                                                    <span class="inner"></span>
+                                                    <span class="inner"></span>
+                                                    <span class="inner"></span>
+                                                </div>
+                                            </td>
+                                        </tr>
                                     </tbody>
                                 </table>
                             </div>
@@ -248,7 +247,6 @@
                         <button class="btn export" type="button">Export</button>
                         <button class="btn btn-success export" type="button" onclick="showLoading();" id="generate_schedule_button" style="margin-right: 10px">Generate</button>
                     </div>
-                    </form>
                 </div>
             </div>
             <!-- /.container-fluid -->
@@ -312,16 +310,24 @@
                 var first = true;
                 var prevDate = 0;
                 var a_d_sched = '{"sched":{';
+                var pos = 0; // Inside the body tag, the first two tr tags for generate message thing and loading icon bother
+                            // the for loop iterates all the schedule rows, so added this variable to count them separately 
 
-                for (var i = 2; i < tbl.rows.length; i++) {
-                    first = true
-                    date = document.getElementById("date" + (i - 2)).getAttribute("name");
-                    game_time = document.getElementById("game_time" + (i - 2)).getAttribute("name");
-                    home_team = document.getElementById("home_team" + (i - 2)).innerHTML;
-                    away_team = document.getElementById("away_team" + (i - 2)).innerHTML;
-                    broadcaster = document.getElementById("broadcaster" + (i - 2)).innerHTML;
+                console.log(tbl.rows.length);
+                for (var i = 0; i < tbl.rows.length; i++) {
+                    // This if condition help avoid the first two tr tags
+                    if (tbl.rows[i].getAttribute("id") == 'temp') {
+                        console.log("aabb");
+                        continue;
+                    }
+                    first = true;
+                    date = document.getElementById("date" + pos).getAttribute("name");
+                    game_time = document.getElementById("game_time" + pos).getAttribute("name");
+                    home_team = document.getElementById("home_team" + pos).innerHTML;
+                    away_team = document.getElementById("away_team" + pos).innerHTML;
+                    broadcaster = document.getElementById("broadcaster" + pos).innerHTML;
                     
-                    approval = document.getElementsByClassName("approval" + (i - 2));
+                    approval = document.getElementsByClassName("approval" + pos);
                     if (approval[0].checked) {
                         approval = approval[0].value;
                     } else if (approval[1].checked) {
@@ -360,6 +366,7 @@
                         }
                         a_d_sched += ']}}';
                     }
+                    pos++;
                 }
                 
                 if (a_d_sched == '{"sched":{') {

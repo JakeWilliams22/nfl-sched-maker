@@ -6,12 +6,12 @@ var a_d_sched = '';
 
 $(document).ready(function(){
     $("#generate_schedule_button").click(function(){
-        a_d_sched = approved_denied_sched()
+        a_d_sched = approved_denied_sched();
         if (a_d_sched != '')
-          $.post('http://localhost:5000/generate-optimized-schedule', {schedule: a_d_sched})
+          $.post('http://localhost:5000/generate-optimized-schedule', {schedule: a_d_sched});
         else
-          $.get('http://localhost:5000/generate-optimized-schedule', handleScheduleResponse)
-    })
+          $.get('http://localhost:5000/generate-optimized-schedule', httpGetAsync('https://nfl-schedule-algorithm.herokuapp.com/generate-optimized-schedule', handleScheduleResponse));
+    });
     $("#week").change(function() {
         var scheduleTable = $('#exportTlb');
         $("#team").val(0);
@@ -37,6 +37,7 @@ $(document).ready(function(){
 });
 
 function handleScheduleResponse(data){
+
     schedule = jQuery.parseJSON(data);
     file = jQuery.parseJSON(data);
     diffScore = file.difficulty_score.toFixed(4);
