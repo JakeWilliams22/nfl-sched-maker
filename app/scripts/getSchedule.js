@@ -7,10 +7,13 @@ var a_d_sched = '';
 $(document).ready(function(){
     $("#generate_schedule_button").click(function(){
         a_d_sched = approved_denied_sched();
-        if (a_d_sched != '')
-          $.post('http://localhost:5000/generate-optimized-schedule', {schedule: a_d_sched});
+        console.log(a_d_sched)
+        if (a_d_sched != '') {
+          $.post('http://nfl-schedule-algorithm.herokuapp.com/generate-optimized-schedule', {schedule: a_d_sched}, handleScheduleResponse);
+          pos = -1
+        }
         else
-          $.get('http://localhost:5000/generate-optimized-schedule', httpGetAsync('https://nfl-schedule-algorithm.herokuapp.com/generate-optimized-schedule', handleScheduleResponse));
+          $.get('https://nfl-schedule-algorithm.herokuapp.com/generate-optimized-schedule', {}, handleScheduleResponse);
     });
     $("#week").change(function() {
         var scheduleTable = $('#exportTlb');

@@ -24,10 +24,12 @@ function openCity(evt, tabName) {
 function showLoading() {
     var l = document.getElementById("loading");
     var lm = document.getElementById("loadingMsg");
-    lm.style.display = "none";
-    if (l.style.display == "none") {
-        l.style.display = "block";
-    } else {
-        l.style.display = "none";
+    if (l != undefined && lm != undefined) {
+      lm.style.display = "none";
+      if (l.style.display == "none") {
+          l.style.display = "block";
+      } else {
+          l.style.display = "none";
+      }
     }
 }

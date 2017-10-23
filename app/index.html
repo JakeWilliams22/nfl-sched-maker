@@ -313,14 +313,13 @@
                 var pos = 0; // Inside the body tag, the first two tr tags for generate message thing and loading icon bother
                             // the for loop iterates all the schedule rows, so added this variable to count them separately 
 
-                console.log(tbl.rows.length);
                 for (var i = 0; i < tbl.rows.length; i++) {
                     // This if condition help avoid the first two tr tags
                     if (tbl.rows[i].getAttribute("id") == 'temp') {
-                        console.log("aabb");
                         continue;
                     }
                     first = true;
+                    console.log("date" + pos)
                     date = document.getElementById("date" + pos).getAttribute("name");
                     game_time = document.getElementById("game_time" + pos).getAttribute("name");
                     home_team = document.getElementById("home_team" + pos).innerHTML;
@@ -372,7 +371,6 @@
                 if (a_d_sched == '{"sched":{') {
                   return ''
                 }
-                console.log(a_d_sched)
                 return a_d_sched
             }
         </script>
