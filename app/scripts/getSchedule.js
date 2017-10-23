@@ -7,7 +7,6 @@ var a_d_sched = '';
 $(document).ready(function(){
     $("#generate_schedule_button").click(function(){
         a_d_sched = approved_denied_sched();
-        console.log(a_d_sched)
         if (a_d_sched != '') {
           $.post('https://nfl-schedule-algorithm.herokuapp.com/generate-optimized-schedule', {schedule: a_d_sched}, handleScheduleResponse);
           pos = -1
