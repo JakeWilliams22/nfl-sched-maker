@@ -9,7 +9,7 @@ $(document).ready(function(){
         a_d_sched = approved_denied_sched();
         console.log(a_d_sched)
         if (a_d_sched != '') {
-          $.post('http://nfl-schedule-algorithm.herokuapp.com/generate-optimized-schedule', {schedule: a_d_sched}, handleScheduleResponse);
+          $.post('https://nfl-schedule-algorithm.herokuapp.com/generate-optimized-schedule', {schedule: a_d_sched}, handleScheduleResponse);
           pos = -1
         }
         else
