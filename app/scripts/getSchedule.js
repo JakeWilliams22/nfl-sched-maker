@@ -1,10 +1,10 @@
 var schedule;
 var dates = ["10-06","10-13","10-20","10-27","11-03","11-10","11-17","11-24","12-01","12-08","12-15","12-22","12-29","1-05","1-12","1-19"];
-var broadcasters = ["FOX", "NBC", "CBS"];
 var pos = -1;
 var a_d_sched = '';
 
 $(document).ready(function(){
+    //gets generated schedule from backend
     $("#generate_schedule_button").click(function(){
         a_d_sched = approved_denied_sched();
         if (a_d_sched != '') {
@@ -14,6 +14,7 @@ $(document).ready(function(){
         else
           $.get('https://nfl-schedule-algorithm.herokuapp.com/generate-optimized-schedule', {}, handleScheduleResponse);
     });
+    //filters schedule by week
     $("#week").change(function() {
         var scheduleTable = $('#exportTlb');
         $("#team").val(0);
@@ -25,6 +26,7 @@ $(document).ready(function(){
             updateScheduleTable(schedule);
         }
     });
+    //filters schedule by team
     $("#team").change(function() {
         var scheduleTable = $('#exportTlb');
         $("#week").val(0);
@@ -38,6 +40,7 @@ $(document).ready(function(){
     });
 });
 
+//parse schedule json
 function handleScheduleResponse(data){
 
     schedule = jQuery.parseJSON(data);
@@ -51,6 +54,7 @@ function handleScheduleResponse(data){
     updateScheduleTable(schedule);
 }
 
+//transforms schedule json to an html table
 function updateScheduleTable(schedule, game){
     $('#exportTlb tbody').children('tr').remove();
 
@@ -63,6 +67,7 @@ function updateScheduleTable(schedule, game){
     }
 }
 
+//builds row of schedule table
 function buildTableRow(date, game) {
     pos++;
     return '<tr><td id="date' + pos + '" name="' + week +'">' + date + '</td><td id="game_time' + pos + '" name="' + game.game_time +'">' + game.game_time 
@@ -83,6 +88,7 @@ function httpGetAsync(theUrl, callback) {
     xmlHttp.send(null);
 }
 
+//filters schedule by given week
 function updateScheduleToWeek(weekNum) {
     console.log('update');
     week = dates[weekNum-1];
@@ -99,6 +105,7 @@ function updateScheduleToWeek(weekNum) {
     }
 }
 
+//filters schedule by given team name
 function updateScheduleToTeam(teamName) {
     console.log('update');
     console.log(teamName);
@@ -121,6 +128,7 @@ function updateScheduleToTeam(teamName) {
     }
 }
 
+//clears table
 function clearTableEntries(table) {
     table.find("tr:gt(0)").remove();
 }
