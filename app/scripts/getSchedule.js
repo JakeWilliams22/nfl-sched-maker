@@ -47,7 +47,12 @@ function handleScheduleResponse(data){
     file = jQuery.parseJSON(data);
     diffScore = file.difficulty_score.toFixed(4);
     travelScore = file.travel_score.toFixed(4);
-    ruleScore = passed;
+    ruleScore = file.difficulty_score.toFixed(4);
+    if (ruleScore > 0) {
+        ruleScore = "passed";
+    } else {
+        ruleScore = "not passed";
+    }
     schedule = file.sched;
     $('#exportRules').replaceWith('<label style="float: right; margin-right: 20px">Rules: ' + ruleScore + '</label>');
     $('#exportTravel').replaceWith('<label style="float: right; margin-right: 20px">Difficulty Score: ' + diffScore + '</label>');
