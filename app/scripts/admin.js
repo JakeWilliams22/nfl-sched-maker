@@ -16,7 +16,7 @@ $(document).ready(function() {
         data.lName = $("#lName").val();
         data.email = $("#email").val();
         data.username = $("#uName").val();
-        data.password = "password";
+        data.password = $("#pass").val();
         data.type = $("#type").val();
         console.log("test");
         console.log(data);
@@ -41,7 +41,7 @@ $(document).ready(function() {
     $("#reset_password_button").click(function(){
         var data = {};
         data.username = $('#reset_password').find(":selected").text();
-        data.password = "password";
+        data.password = $('#password').val();
         $.ajax({
             type: 'POST',
             url: 'https://nfl-schedule-maker.herokuapp.com/changePassword',
