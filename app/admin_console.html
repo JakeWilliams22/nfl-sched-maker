@@ -14,6 +14,7 @@
         <script src="scripts/script.js" type='text/javascript'></script>
         <script src="scripts/jQueryCode.js" type='text/javascript'></script>
         <script src="scripts/getSchedule.js" type='text/javascript'></script>
+        <script src="scripts/admin.js" type="text/javascript"></script>
 
         <!-- Bootstrap core CSS -->
         <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -87,23 +88,31 @@
                     </div>
                     <div class="container">
                         <br>
-                        <label for=""><h4>Add User:</h4></label>
+                        <label><h4>Add User:</h4></label>
                         <form action="">
                             <div class="form-inline">
-                                <label for="week">Email:&nbsp;&nbsp;</label>
-                                <input type="email"/>
-                                &nbsp;&nbsp;&nbsp;&nbsp;
-                                <button class="btn btn-success export" type="button">Add</button>
+                                <label>First Name</label>
+                                <input type="text" id="fName" name="fName"/>
+                                <label>Last Name</label>
+                                <input type="text" id="lName" name="lName"/>
+                                <label>Email:&nbsp;&nbsp;</label>
+                                <input type="email" id="email" name="email"/>
+                                <label>Username</label>
+                                <input type="text" id="uName" name="uName"/>
+                                <label>User Type</label>
+                                <input type="text" id="type" name="type"/>
+
+                                <button class="btn btn-success export" type="button" id="add_user_button">Add</button>
                                 &nbsp;&nbsp;&nbsp;&nbsp;
                             </div>
                         </form>
                         &nbsp;&nbsp;&nbsp;&nbsp;
                         <br><br>
-                        <label for=""><h4>Delete / Suspend Account:</h4></label>
+                        <label><h4>Delete / Suspend Account:</h4></label>
                         <form action="">
                             <div class="form-inline">
-                                <label for="week">User:&nbsp;&nbsp;</label>
-                                <select class="form-control" name="week" id="week">
+                                <label>User:&nbsp;&nbsp;</label>
+                                <select class="form-control">
                                     <option>Jacob Williams</option>
                                     <option>Elizabeth Cooper</option>
                                     <option>Saqlain Golandaz</option>
@@ -118,11 +127,11 @@
                         </form>
 
                         <br><br>
-                        <label for=""><h4>Reset Password:</h4></label>
+                        <label><h4>Reset Password:</h4></label>
                         <form action="">
                             <div class="form-inline">
-                                <label for="week">User:&nbsp;&nbsp;</label>
-                                <select class="form-control" name="week" id="week">
+                                <label>User:&nbsp;&nbsp;</label>
+                                <select class="form-control">
                                     <option>Jacob Williams</option>
                                     <option>Elizabeth Cooper</option>
                                     <option>Saqlain Golandaz</option>
