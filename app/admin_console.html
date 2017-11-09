@@ -112,34 +112,23 @@
                         <form action="">
                             <div class="form-inline">
                                 <label>User:&nbsp;&nbsp;</label>
-                                <select class="form-control">
-                                    <option>Jacob Williams</option>
-                                    <option>Elizabeth Cooper</option>
-                                    <option>Saqlain Golandaz</option>
-                                    <option>Cole Taylor</option>
-                                    <option>Jaehong Park</option>
+                                <select class="form-control" id="delete_user">
                                 </select>
                                 &nbsp;&nbsp;&nbsp;&nbsp;
-                                <button class="btn btn-success export" type="button">Delete</button>
-                                &nbsp;&nbsp;&nbsp;&nbsp;
-                                <button class="btn export" type="button">Suspend</button>
+                                <button class="btn btn-success export" type="button" id="delete_user_button">Delete</button>
                             </div>
                         </form>
 
                         <br><br>
-                        <label><h4>Reset Password:</h4></label>
+                        <label><h4>Change Password:</h4></label>
                         <form action="">
                             <div class="form-inline">
                                 <label>User:&nbsp;&nbsp;</label>
-                                <select class="form-control">
-                                    <option>Jacob Williams</option>
-                                    <option>Elizabeth Cooper</option>
-                                    <option>Saqlain Golandaz</option>
-                                    <option>Cole Taylor</option>
-                                    <option>Jaehong Park</option>
+                                <select class="form-control" id="reset_password">
                                 </select>
-                                &nbsp;&nbsp;&nbsp;&nbsp;
-                                <button class="btn btn-success export" type="button">Reset</button>
+                                <label>Password</label>
+                                <input type="password" id="password" name="password"/>
+                                <button class="btn btn-success export" type="button" id="reset_password_button">Reset</button>
                                 &nbsp;&nbsp;&nbsp;&nbsp;
                             </div>
                         </form>
