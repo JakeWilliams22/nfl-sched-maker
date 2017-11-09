@@ -8,11 +8,13 @@ $(document).ready(function(){
     $("#generate_schedule_button").click(function(){
         a_d_sched = approved_denied_sched();
         if (a_d_sched != '') {
-          $.post('https://nfl-schedule-algorithm.herokuapp.com/generate-optimized-schedule', {schedule: a_d_sched}, handleScheduleResponse);
-          pos = -1
+            $.post('https://nfl-schedule-algorithm.herokuapp.com/generate-optimized-schedule', {schedule: a_d_sched}, handleScheduleResponse);
+            pos = -1
+            $('#week option:contains(All)').prop({selected: true});
+            $('#team option:contains(All)').prop({selected: true});
+        } else {
+            $.get('https://nfl-schedule-algorithm.herokuapp.com/generate-optimized-schedule', {}, handleScheduleResponse);
         }
-        else
-          $.get('https://nfl-schedule-algorithm.herokuapp.com/generate-optimized-schedule', {}, handleScheduleResponse);
     });
     //filters schedule by week
     $("#week").change(function() {
@@ -27,7 +29,7 @@ $(document).ready(function(){
         var tr = tableBody.getElementsByTagName("tr");
         var selectedWeek = input.options[input.selectedIndex].value;
         if (selectedWeek > 0) {
-            var week = dates[selectedWeek - 1]; 
+            var week = dates[selectedWeek - 1];
             
             for (var i = 0; i < tr.length; i++) {
                 var td = tr[i].getElementsByTagName("td")[0]; // Only chosen column here is used for filtering
@@ -72,7 +74,7 @@ $(document).ready(function(){
                     } else {
                         tr[i].style.display = "none";
                     }
-                }       
+                }
             }
         } 
     });
@@ -114,12 +116,28 @@ function updateScheduleTable(schedule, game){
 //builds row of schedule table
 function buildTableRow(date, game) {
     pos++;
-    return '<tr><td id="date' + pos + '" name="' + week +'">' + date + '</td><td id="game_time' + pos + '" name="' + game.game_time +'">' + game.game_time 
-            + ':00' + '</td><td id="home_team' + pos + '">' + game.home_team 
+    
+    var tableRow = '<tr><td id="date' + pos + '" name="' + week +'">' + date + '</td><td id="game_time' + pos + '" name="' 
+            + game.game_time +'">' + game.game_time + ':00' + '</td><td id="home_team' + pos + '">' + game.home_team 
             + '</td><td id="away_team' + pos + '">' + game.away_team + '</td><td id="broadcaster' + pos + '">' + game.broadcaster 
-            + '</td><td align="center"><input type="radio" value="1" class="approval' + pos + '" name="approval' + pos +'"></td>'
+            + '</td>';
+
+    if (game.approved == 0) {
+        tableRow += '<td align="center"><input type="radio" value="1" class="approval' + pos + '" name="approval' + pos +'"></td>'
             + '<td align="center"><input type="radio" value="-1" class="approval' + pos + '" name="approval' + pos +'"></td>'
-            + '<td hidden><input type="radio" value="0" class="approval' + pos + '" name="approval' + pos + '" checked></td></tr>';
+            + '<td hidden><input type="radio" value="0" class="approval' + pos + '" name="approval' + pos + '" checked></td>';
+    } else if (game.approved == 1) {
+        tableRow += '<td align="center"><input type="radio" value="1" class="approval' + pos + '" name="approval' + pos +'" checked></td>'
+            + '<td align="center"><input type="radio" value="-1" class="approval' + pos + '" name="approval' + pos +'"></td>'
+            + '<td hidden><input type="radio" value="0" class="approval' + pos + '" name="approval' + pos + '"></td>';
+    } else if (game.approved == -1) {
+        tableRow += '<td align="center"><input type="radio" value="1" class="approval' + pos + '" name="approval' + pos +'"></td>'
+            + '<td align="center"><input type="radio" value="-1" class="approval' + pos + '" name="approval' + pos +'" checked></td>'
+            + '<td hidden><input type="radio" value="0" class="approval' + pos + '" name="approval' + pos + '"></td>';
+    }
+
+    tableRow += '</tr>';
+    return tableRow;
 }
 
 function httpGetAsync(theUrl, callback) {
