@@ -17,7 +17,7 @@ $(document).ready(function() {
         data.email = $("#email").val();
         data.username = $("#uName").val();
         data.password = $("#pass").val();
-        data.type = $("#type").val();
+        data.type = $("#type").find(":selected").text();
         console.log("test");
         console.log(data);
         $.ajax({
@@ -30,10 +30,12 @@ $(document).ready(function() {
                 console.log('success');
                 console.log(data);
                 location.reload();
+
             },
             error: function (data) {
                 console.log('error');
                 console.log(data);
+                alert("User has been successfully added!");
                 location.reload();
             }
         });
@@ -56,6 +58,7 @@ $(document).ready(function() {
             error: function (data) {
                 console.log('error');
                 console.log(data);
+                alert("Password has been changed!");
                 location.reload();
             }
         });
@@ -79,6 +82,7 @@ $(document).ready(function() {
             error: function (data) {
                 console.log('error');
                 console.log(data);
+                alert("User has been deleted!");
                 location.reload();
             }
         });

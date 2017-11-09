@@ -90,27 +90,36 @@
                         <br>
                         <label><h4>Add User:</h4></label>
                         <form action="">
-                            <div class="form-inline">
-                                <label>First Name</label>
-                                <input type="text" id="fName" name="fName"/>
-                                <label>Last Name</label>
-                                <input type="text" id="lName" name="lName"/>
-                                <label>Email:&nbsp;&nbsp;</label>
-                                <input type="email" id="email" name="email"/>
-                                <label>Username</label>
-                                <input type="text" id="uName" name="uName"/>
-                                <label>Password</label>
-                                <input type="password" id="pass" name="pass"/>
-                                <label>User Type</label>
-                                <input type="text" id="type" name="type"/>
+                                <div class="form-group">
+                                    <input type="text" name="rg-fName" placeholder="First Name" class="form-username form-control" id="fName">
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" name="rg-lName" placeholder="Last Name" class="form-password form-control" id="lName">
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" name="rg-uName" placeholder="Username" class="form-control" id="uName">
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" name="rg-pw" placeholder="Password" class="form-password form-control" id="pass">
+                                </div>
+                                <div class="form-group">
+                                    <input type="email" name="rg-email" placeholder="Email" class="form-password form-control" id="email">
+                                </div>
+                                <div class="form-group">
+                                    <select name="rg-role" class="form-control selectpicker" title="Role" id="type">
+                                        <option value="sUser">Standard User</option>
+                                        <option value="vUser">View-Only User</option>
+                                        <option value="tOwner">Team Owner</option>
+                                        <option value="admin">Admin</option>
+                                    </select>
+                                </div>
 
                                 <button class="btn btn-success export" type="button" id="add_user_button">Add</button>
                                 &nbsp;&nbsp;&nbsp;&nbsp;
-                            </div>
                         </form>
                         &nbsp;&nbsp;&nbsp;&nbsp;
                         <br><br>
-                        <label><h4>Delete / Suspend Account:</h4></label>
+                        <label><h4>Delete Account:</h4></label>
                         <form action="">
                             <div class="form-inline">
                                 <label>User:&nbsp;&nbsp;</label>
@@ -128,18 +137,20 @@
                                 <label>User:&nbsp;&nbsp;</label>
                                 <select class="form-control" id="reset_password">
                                 </select>
-                                <label>Password</label>
-                                <input type="password" id="password" name="password"/>
+                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                <label>Password:&nbsp;&nbsp;</label>
+                                <input type="password" id="password" name="password" class="form-control"/>
+                                &nbsp;&nbsp;&nbsp;&nbsp;
                                 <button class="btn btn-success export" type="button" id="reset_password_button">Reset</button>
                                 &nbsp;&nbsp;&nbsp;&nbsp;
                             </div>
                         </form>
                         <br>
                     </div>
-                    <div class="card-footer small text-muted" align="right">
+                    <!--<div class="card-footer small text-muted" align="right">
                         <button class="btn btn-warning export" type="button">Reset Schedule</button>
                         <button class="btn btn-warning export" type="button" style="margin-right: 10px">Approve Schedule</button>
-                    </div>
+                    </div>-->
                 </div>
             </div>
             <!-- /.container-fluid -->
