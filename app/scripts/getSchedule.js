@@ -16,27 +16,65 @@ $(document).ready(function(){
     });
     //filters schedule by week
     $("#week").change(function() {
-        var scheduleTable = $('#exportTlb');
-        $("#team").val(0);
-        clearTableEntries(scheduleTable);
-        var week = this.value;
-        if (week > 0) {
-            updateScheduleToWeek(week);
-        } else if (week == 0) {
-            updateScheduleTable(schedule);
+        var tableBody = document.getElementById("tblBody");
+        if (tableBody.rows.length < 3) {
+            alert("Please generate schedule before filtering.")
+            $('#week option:contains(All)').prop({selected: true});
+            return;
+        }
+
+        var input = document.getElementById("week");
+        var tr = tableBody.getElementsByTagName("tr");
+        var selectedWeek = input.options[input.selectedIndex].value;
+        if (selectedWeek > 0) {
+            var week = dates[selectedWeek - 1]; 
+            
+            for (var i = 0; i < tr.length; i++) {
+                var td = tr[i].getElementsByTagName("td")[0]; // Only chosen column here is used for filtering
+                if (td) {
+                    if (td.innerHTML.indexOf(week) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }       
+            }
+        } else {
+            for (var i = 0; i < tr.length; i++) {
+                tr[i].style.display = "";
+            }
         }
     });
     //filters schedule by team
     $("#team").change(function() {
-        var scheduleTable = $('#exportTlb');
-        $("#week").val(0);
-        clearTableEntries(scheduleTable);
-        var team = this.value;
-        if (team == 0) {
-            updateScheduleTable(schedule);
-        } else {
-            updateScheduleToTeam(team);
+        var tableBody = document.getElementById("tblBody");
+        if (tableBody.rows.length < 3) {
+            alert("Please generate schedule before filtering.")
+            $('#team option:contains(All)').prop({selected: true});
+            return;
         }
+
+        var input = document.getElementById("team");
+        var tr = tableBody.getElementsByTagName("tr");
+        var selectedTeam = input.options[input.selectedIndex].innerHTML;
+        if (selectedTeam == "All") {
+            for (var i = 0; i < tr.length; i++) {
+                tr[i].style.display = "";
+            }
+        } else {
+            for (var i = 0; i < tr.length; i++) {
+                var td1 = tr[i].getElementsByTagName("td")[2]; // Only chosen column here is used for filtering
+                var td2 = tr[i].getElementsByTagName("td")[3]; // Only chosen column here is used for filtering
+                if (td1 || td2) {
+                    if (td1.innerHTML.indexOf(selectedTeam) > -1 
+                        || td2.innerHTML.indexOf(selectedTeam) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }       
+            }
+        } 
     });
 });
 
@@ -47,8 +85,14 @@ function handleScheduleResponse(data){
     file = jQuery.parseJSON(data);
     diffScore = file.difficulty_score.toFixed(4);
     travelScore = file.travel_score.toFixed(4);
+    ruleScore = file.difficulty_score.toFixed(4);
+    if (ruleScore > 0) {
+        ruleScore = "passed";
+    } else {
+        ruleScore = "not passed";
+    }
     schedule = file.sched;
-    //$('#exportRules').replaceWith('<label style="float: right; margin-right: 20px">Rules: ' + ruleScore + '</label>');
+    $('#exportRules').replaceWith('<label style="float: right; margin-right: 20px">Rules: ' + ruleScore + '</label>');
     $('#exportTravel').replaceWith('<label style="float: right; margin-right: 20px">Difficulty Score: ' + diffScore + '</label>');
     $('#exportDiff').replaceWith('<label style="float: right"> Travel Score: ' + travelScore + '</label>');
     updateScheduleTable(schedule);
@@ -86,46 +130,6 @@ function httpGetAsync(theUrl, callback) {
     }
     xmlHttp.open("GET", theUrl, true); // true for asynchronous
     xmlHttp.send(null);
-}
-
-//filters schedule by given week
-function updateScheduleToWeek(weekNum) {
-    console.log('update');
-    week = dates[weekNum-1];
-    var mon = parseInt(week.substring(0,2));
-    if (mon >= 10 && mon <= 12) {
-        week = "2018-" + week + " 00:00:00";
-    } else {
-        week = "2019-0" + week + " 00:00:00";
-    }
-    for (i=0; i< schedule[week].length; i++) {
-        date = week.substring(week.indexOf('-')+1, week.indexOf('-')+6);
-        game = schedule[week][i];
-        $('#exportTlb tbody').append(buildTableRow(date, game));
-    }
-}
-
-//filters schedule by given team name
-function updateScheduleToTeam(teamName) {
-    console.log('update');
-    console.log(teamName);
-    for (i=0; i<dates.length; i++) {
-        week = dates[i];
-        var mon = parseInt(week.substring(0,2));
-        if (mon >= 10 && mon <= 12) {
-            week = "2018-" + week + " 00:00:00";
-        } else {
-            week = "2019-0" + week + " 00:00:00";
-        }
-        for (j=0; j<schedule[week].length; j++) {
-            game = schedule[week][j];
-            console.log(game.away_team);
-            date = week.substring(week.indexOf('-')+1, week.indexOf('-')+6);
-            if (game.away_team == teamName || game.home_team == teamName) {
-                $('#exportTlb tbody').append(buildTableRow(date, game));
-            }
-        }
-    }
 }
 
 //clears table
