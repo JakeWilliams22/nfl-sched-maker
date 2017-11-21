@@ -2,7 +2,7 @@ $(document).ready(function() {
     var data = {};
     data.username = "ecooper5";
     $.ajax({
-        type: 'GET',
+        type: 'POST',
         url: 'https://nfl-schedule-maker.herokuapp.com/getUser',
         data: JSON.stringify(data),
         dataType: 'json',
