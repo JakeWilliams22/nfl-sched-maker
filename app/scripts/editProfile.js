@@ -8,7 +8,10 @@ $(document).ready(function() {
         dataType: 'json',
         contentType: 'application/json',
         success: function(data) {
-            console.log(data);
+            console.log(data[0]);
+            $('input[name="rg-fName"]').val(data[0].fname);
+            $('input[name="rg-lName"]').val(data[0].lname);
+            $('input[name="rg-email"]').val(data[0].email);
         }
     });
 });
