@@ -45,15 +45,15 @@
                         		</div>
                             </div>
                             <div class="form-bottom">
-			                    <form role="form" action="app/index.html" method="post" class="login-form">
+			                    <form action="">
 			                    	<div class="form-group">
-			                        	<input type="text" name="form-username" placeholder="Username" class="form-username form-control" id="form-username">
+			                        	<input type="text" id="login_username" name="form-username" placeholder="Username" class="form-username form-control">
 			                        </div>
 			                        <div class="form-group">
-			                        	<input type="password" name="form-password" placeholder="Password" class="form-password form-control" id="form-password">
+			                        	<input type="password" id="login_password" name="form-password" placeholder="Password" class="form-password form-control">
 			                        </div>
                                     <div class="form-group">
-                                        <button type="submit" class="btn btn-success">Log In</button>    
+                                        <button type="button" class="btn btn-success" id="btn_login">Log In</button>    
                                     </div>
 			                    </form>
 		                    </div>
@@ -66,21 +66,6 @@
                                 <button type="button" class="btn btn-warning" onclick="location.href='registration/index.html'">Sign up</button>
                             </div>
                         </div>
-
-                        <div class="col-sm-6 col-sm-offset-3 social-login">
-                        	<h3>...or login with:</h3>
-                        	<div class="social-login-buttons">
-	                        	<a class="btn btn-link-1 btn-link-1-facebook" href="#">
-	                        		<i class="fa fa-facebook"></i> Facebook
-	                        	</a>
-	                        	<a class="btn btn-link-1 btn-link-1-twitter" href="#">
-	                        		<i class="fa fa-twitter"></i> Twitter
-	                        	</a>
-	                        	<a class="btn btn-link-1 btn-link-1-google-plus" href="#">
-	                        		<i class="fa fa-google-plus"></i> Google Plus
-	                        	</a>
-                        	</div>
-                        </div>
                     </div>
                 </div>
             </div>            
@@ -90,5 +75,6 @@
         <script src="assets/bootstrap/js/bootstrap.min.js"></script>
         <script src="assets/js/jquery.backstretch.min.js"></script>
         <script src="assets/js/scripts.js"></script>
+        <script src="app/scripts/login.js" type="text/javascript"></script>
     </body>
 </html>
