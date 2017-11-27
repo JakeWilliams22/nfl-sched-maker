@@ -23,7 +23,7 @@ $(document).ready(function() {
             type: 'POST',
             url: 'https://nfl-schedule-maker.herokuapp.com/login',
             data: JSON.stringify(data),
-            dataType: 'json',
+            dataType: 'text',
             contentType: 'application/json',
             success: function(data) {
                 console.log('success');
@@ -35,9 +35,9 @@ $(document).ready(function() {
                     location.reload();
                 }
             },
-            error: function (data) {
-                console.log('error');
-                console.log(data);
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                console.log(errorThrown);
+                console.log(textStatus);
                 alert("Incorrect username or password.");
                 location.reload();
             }
