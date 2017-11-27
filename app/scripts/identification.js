@@ -86,12 +86,12 @@ $(document).ready(function() {
                     localStorage.removeItem('email');
                     localStorage.removeItem('username');
                     localStorage.removeItem('password');
-                    window.location.href = "../index.html";
+                    window.location.href = "../index.php";
                 },
                 error: function (XMLHttpRequest, textStatus, errorThrown) {
                     console.log(errorThrown);
                     console.log(textStatus);
-                    // alert("Some errors happened for logout.");
+                    alert("Some errors happened for logout.");
                     location.reload();
                 }
             });           
