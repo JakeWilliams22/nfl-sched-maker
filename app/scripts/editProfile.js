@@ -1,7 +1,6 @@
 $(document).ready(function() {
     var data = {};
-    var uName = "ecooper5";
-    data.username = uName;
+    data.username = localStorage.getItem('username');
     $.ajax({
         type: 'POST',
         url: 'https://nfl-schedule-maker.herokuapp.com/getUser',
@@ -9,9 +8,11 @@ $(document).ready(function() {
         dataType: 'json',
         contentType: 'application/json',
         success: function(data) {
-            $('input[name="rg-fName"]').val(data[0].fname);
-            $('input[name="rg-lName"]').val(data[0].lname);
-            $('input[name="rg-email"]').val(data[0].email);
+            $('input[name="rg-fName"]').val(localStorage.getItem('fname'));
+            $('input[name="rg-lName"]').val(localStorage.getItem('lname'));
+            $('input[name="rg-email"]').val(localStorage.getItem('email'));
+            $('input[name="rg-pass"]').val(localStorage.getItem('password'));
+            $('input[name="rg-user"]').val(localStorage.getItem('username'));
         }
     });
 
@@ -20,7 +21,7 @@ $(document).ready(function() {
         data.fname = $("#fName").val();
         data.lname = $("#lName").val();
         data.email = $("#email").val();
-        data.username = uName;
+        data.username = localStorage.getItem('username');
         console.log("test");
         console.log(data);
         $.ajax({
@@ -32,12 +33,37 @@ $(document).ready(function() {
             success: function (data) {
                 console.log('success');
                 console.log(data);
+                // alert("Information has been successfully updated!");
+            },
+            error: function (data) {
+                console.log('error');
+                console.log(data);
+                alert("Some errors happened!");
+            }
+        });
+    });
+
+    $("#edit_profile").click(function() {
+        var data = {};
+        data.username = localStorage.getItem('username');
+        data.password = $("#pass").val();
+        console.log("test");
+        console.log(data);
+        $.ajax({
+            type: 'POST',
+            url: 'https://nfl-schedule-maker.herokuapp.com/changePassword',
+            data: JSON.stringify(data),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                console.log('success');
+                console.log(data);
                 alert("Information has been successfully updated!");
             },
             error: function (data) {
                 console.log('error');
                 console.log(data);
-                alert("Information has been successfully updated!");
+                alert("Some errors happened!");
             }
         });
     });
