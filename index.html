@@ -28,7 +28,7 @@
                             <h1><strong>coNFLict</strong></h1>
                             <div class="description">
                             	<p>
-	                            	The best scheduler for NFL footbal games!
+	                            	The best scheduler for NFL football games!
                             	</p>
                             </div>
                         </div>

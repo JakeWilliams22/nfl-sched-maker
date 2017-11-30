@@ -90,12 +90,6 @@
                             <span class="nav-link-text">Schedule</span>
                         </a>
                     </li>
-                    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Preferences">
-                        <a class="nav-link" href="preferences.html">
-                            <i class="fa fa-fw fa-file"></i>
-                            <span class="nav-link-text">Preferences</span>
-                        </a>
-                    </li>
                     <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Admin Console">
                         <a class="nav-link" href="admin_console.html">
                             <i class="fa fa-fw fa-cog"></i>
@@ -113,7 +107,7 @@
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="modal" data-target="#" href="editProfile.html">
-                            <i class="fa fa-fw fa-user-circle-o"></i>Stephen C.
+                            <i class="fa fa-fw fa-user-circle-o"></i>Jake W.
                         </a>
                     </li>
                     <li class="nav-item">
@@ -132,6 +126,10 @@
                 <div class="card mb-3">
                     <div class="card-header">
                         <i class="fa fa-table"></i> Schedule
+                        <div align="right" style="float: right;">
+                            <button class="btn btn-sm export" type="button">Export</button>
+                            <button class="btn btn-success btn-sm export generate_schedule_button" type="button" onclick="showLoading();" style="margin-right: 10px">Generate</button>
+                        </div>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -245,8 +243,8 @@
                         </div>
                     </div>
                     <div class="card-footer small text-muted" align="right">
-                        <button class="btn export" type="button">Export</button>
-                        <button class="btn btn-success export" type="button" onclick="showLoading();" id="generate_schedule_button" style="margin-right: 10px">Generate</button>
+                        <button class="btn btn-sm export" type="button">Export</button>
+                        <button class="btn btn-success btn-sm export generate_schedule_button" type="button" onclick="showLoading();" style="margin-right: 10px">Generate</button>
                     </div>
                 </div>
             </div>

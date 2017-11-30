@@ -16,7 +16,6 @@ $(document).ready(function() {
         data.password = $("#login_password").val();
         console.log(data);
         console.log(a);
-        console.log(a.length);
         for (var i = 0; i < a.length; i++) {
             if (data.username === a[i].username && data.password === a[i].password) {
                 data.fname = a[i].fname;
@@ -25,7 +24,6 @@ $(document).ready(function() {
                 break;
             }
         }
-        // alert("test");
         $.ajax({
             type: 'POST',
             url: 'https://nfl-schedule-maker.herokuapp.com/login',
@@ -56,7 +54,6 @@ $(document).ready(function() {
                     localStorage.setItem('password', data.password);
                     console.log(localStorage.getItem('password'));
                     
-                    // alert("test2");
                     window.location.href = "app/index.html";
                 }
             },
@@ -86,7 +83,7 @@ $(document).ready(function() {
                     localStorage.removeItem('email');
                     localStorage.removeItem('username');
                     localStorage.removeItem('password');
-                    window.location.href = "../index.php";
+                    window.location.href = "../index.html";
                 },
                 error: function (XMLHttpRequest, textStatus, errorThrown) {
                     console.log(errorThrown);
